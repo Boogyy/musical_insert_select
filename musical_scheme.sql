@@ -29,7 +29,7 @@ create table if not exists AlbumPerfomer(
 create table if not exists Tracks(
 	id SERIAL primary key,
 	album_id integer not null references Albums(id),
-	duration smallint check(duration < 1000),
+	duration_sec smallint check(duration < 1000),
 	track_name varchar(60) unique not null
 );
 
