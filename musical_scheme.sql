@@ -1,11 +1,11 @@
 create table if not exists Genres(
 	id SERIAL primary key,
-	genre_name varchar(60) not null
+	genre_name varchar(60) unique not null 
 );
 
 create table if not exists Perfomers(
 	id SERIAl primary key,
-	name varchar(60) not null
+	name varchar(60) unique not null
 );
 
 create table if not exists GenrePerfomer(
@@ -16,8 +16,8 @@ create table if not exists GenrePerfomer(
 
 create table if not exists Albums(
 	id SERIAL primary key,
-	album_name varchar(60) not null,
-	release_year smallint
+	album_name varchar(60) unique not null,
+	release_year smallint check(release_year > 1950)
 );
 
 create table if not exists AlbumPerfomer(
@@ -29,14 +29,14 @@ create table if not exists AlbumPerfomer(
 create table if not exists Tracks(
 	id SERIAL primary key,
 	album_id integer not null references Albums(id),
-	duration_sec smallint,
-	track_name varchar(60) not null
+	duration smallint check(duration < 1000),
+	track_name varchar(60) unique not null
 );
 
 create table if not exists Collections(
 	id SERIAL primary key,
-	collection_name varchar(60) not null,
-	release_year smallint
+	collection_name varchar(60) unique not null,
+	release_year smallint check(release_year > 1950)
 );
 
 create table if not exists CollectionTrack(
